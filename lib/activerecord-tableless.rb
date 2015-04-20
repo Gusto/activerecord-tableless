@@ -257,15 +257,6 @@ module ActiveRecord
         end
       end
 
-      def reload(*args)
-        case self.class.tableless_options[:database]
-        when :pretend_success
-          self
-        when :fail_fast
-          raise NoDatabase.new("Can't #reload a Tableless object")
-        end
-      end
-
       if ActiveRecord::VERSION::MAJOR >= 3
         def add_to_transaction
         end
