@@ -257,6 +257,10 @@ module ActiveRecord
         end
       end
 
+      def new_record?
+        id.nil?
+      end
+
       if ActiveRecord::VERSION::MAJOR >= 3
         def add_to_transaction
         end
