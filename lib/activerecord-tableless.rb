@@ -90,7 +90,7 @@ module ActiveRecord
           # from https://github.com/activescaffold/active_scaffold/blob/master/lib/active_scaffold/tableless.rb
           cast_type = ActiveRecord::Base.connection.send :lookup_cast_type, sql_type
           tableless_options[:columns] << ActiveRecord::ConnectionAdapters::Column.new(name.to_s, default, cast_type, sql_type.to_s, null)
-        rescue ActiveRecord::NoDatabaseError => e
+        rescue
           # Database has not yet been created, bypassing sql cast
         end
       else
