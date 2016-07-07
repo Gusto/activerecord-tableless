@@ -150,7 +150,7 @@ module ActiveRecord
           when :pretend_success
             []
           when :fail_fast
-            raise NoDatabase.new("Can't #find_every on Tableless class")
+            raise NoDatabase.new("Can't #all on Tableless class")
           end
 
         end
@@ -162,7 +162,15 @@ module ActiveRecord
           when :fail_fast
             raise NoDatabase.new("Can't #find_by_sql on Tableless class")
           end
-
+        end
+      when 5
+        def find_by_sql(*args)
+          case tableless_options[:database]
+          when :pretend_success
+            []
+          when :fail_fast
+            raise NoDatabase.new("Can't #find_by_sql on Tableless class")
+          end
         end
       else
         raise Unsupported.new("Unsupported ActiveRecord version")
